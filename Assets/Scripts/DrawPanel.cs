@@ -8,6 +8,7 @@ public class DrawPanel : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     [SerializeField] private Material lineMaterial;
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Transform colliderPrefab;
+    [SerializeField] private float colliderCloseness;
 
     private GameObject lineGameObject;
     private LineRenderer lineGameObjectRenderer;
@@ -55,7 +56,7 @@ public class DrawPanel : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         {
             Vector3 distance = mousePosition - Input.mousePosition;
 
-            if(distance.sqrMagnitude > 1f)
+            if(distance.sqrMagnitude > 5f)
             {
                 lineGameObjectRenderer.SetPosition(currentIndex, mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,Input.mousePosition.y, Input.mousePosition.z + 5f)));
 
@@ -65,7 +66,7 @@ public class DrawPanel : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
                     lastInstantiatedCollider.LookAt(currentLinePosition);
 
-                    lastInstantiatedCollider.localScale = new Vector3(lastInstantiatedCollider.localScale.x, lastInstantiatedCollider.localScale.y, Vector3.Distance(lastInstantiatedCollider.position, currentLinePosition) * 0.5f);
+                    lastInstantiatedCollider.localScale = new Vector3(lastInstantiatedCollider.localScale.x, lastInstantiatedCollider.localScale.y, Vector3.Distance(lastInstantiatedCollider.position, currentLinePosition) * colliderCloseness);
                 }
 
                 lastInstantiatedCollider = Instantiate(colliderPrefab, lineGameObjectRenderer.GetPosition(currentIndex),Quaternion.identity, lineGameObject.transform);
@@ -78,7 +79,7 @@ public class DrawPanel : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
                 lineGameObjectRenderer.SetPosition(currentIndex, mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,Input.mousePosition.y, Input.mousePosition.z + 5f)));
 
-                if(currentIndex>60)
+                if(currentIndex>100)
                 {
                     startDrawing = false;
                 }

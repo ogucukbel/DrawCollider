@@ -899,6 +899,7 @@ MonoBehaviour:
   lineMaterial: {fileID: 2100000, guid: e46895b998c62f84da8eba55fc129f7c, type: 2}
   mainCamera: {fileID: 963194227}
   colliderPrefab: {fileID: 5343602258603631131, guid: 3c5f56974ab14d542b885f365e15528c, type: 3}
+  colliderCloseness: 1.5
 --- !u!114 &1579220961
 MonoBehaviour:
   m_ObjectHideFlags: 0
